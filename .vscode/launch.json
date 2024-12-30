@@ -15,12 +15,14 @@
             "name": "learnings_app (profile mode)",
             "request": "launch",
             "type": "dart",
+            "program": "lib/modules/booking/presentation/home_page.dart",
             "flutterMode": "profile"
         },
         {
             "name": "learnings_app (release mode)",
             "request": "launch",
             "type": "dart",
+            "program": "lib/modules/booking/presentation/home_page.dart",
             "flutterMode": "release"
         }
     ]

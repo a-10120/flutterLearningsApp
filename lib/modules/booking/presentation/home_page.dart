@@ -10,10 +10,25 @@ import 'package:learnings_app/modules/booking/bloc/home/home_bloc.dart';
 import 'package:learnings_app/modules/booking/navigation/booking_router.dart';
 import 'package:learnings_app/modules/booking/presentation/flight_search/flight_search.dart';
 import 'package:learnings_app/modules/booking/presentation/flight_search/viewmodel/occupancy_model.dart';
+import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+//sqfliteFfiInit();
 
-//WidgetsFlutterBinding.ensureInitialized();
+
+ //databaseFactory = databaseFactoryFfi;
+
+
+final database=openDatabase(join(await getDatabasesPath(),'user_details.db'),
+onCreate: (db, version) {
+  return db.execute('create table user(email text primary key , password text)');
+},
+version: 1
+);
+//final db=openDatabase(join(await getDatabasesPath(),"fgrr"));
 //  await Firebase.initializeApp(
 //         options: FirebaseOptions(
 //             apiKey: "your api key Found in GoogleService-info.plist",
@@ -106,7 +121,18 @@ late HomeBloc _homebloc;
     }
     if(state is HomePageLoadedState){
  return Scaffold(
-    appBar: AppBar(title: Text("Welcome"),backgroundColor: Colors.purple,),
+    appBar: AppBar(title: 
+    TweenAnimationBuilder(child:Text("Welcome") ,tween: Tween(begin: 0.0,end: 1.0),
+    duration: Duration(milliseconds: 500),
+    builder: (context,  value, child) {
+      return Opacity(opacity: value.toDouble(),child: Padding(
+        padding: EdgeInsets.only(top:value*20),
+        child: child,
+      ),);
+    },
+    )
+  //  Text("Welcome"),backgroundColor: Colors.purple,
+    ),
     body:Center(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
